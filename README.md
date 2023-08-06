@@ -46,7 +46,10 @@
    pip install -r req.txt
    ```
 
-4. Запустите скрипт командой
+4. Файл config_RENAME.cfg переименуйте в config.cfg и в нем укажите необходимые данные.
+
+
+5. Запустите скрипт командой
    
    ```bash
    python3 start.py
