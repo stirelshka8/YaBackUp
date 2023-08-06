@@ -51,6 +51,5 @@ def upload_to_yandex_disk(file_path):
 
 def start():
     directories = ("".join((config["RUNS"]["BACK_DIR"]).split(","))).split()
-    print(directories)
     backup_file = create_backup(directories)
     upload_to_yandex_disk(backup_file)
