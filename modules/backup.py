@@ -14,19 +14,20 @@ def create_backup(directories_loc):
     backup_dir = '/tmp'
 
     # Создание имени архива
-    backup_files = f'backup_{((str(datetime.timestamp(datetime.now()))).split("."))[0]}.zip'
+    backup_files = f'backup_{str(int(datetime.timestamp(datetime.now())))}.zip'
 
     # Создание архива
-    with zipfile.ZipFile(backup_dir + '/' + backup_files, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    with zipfile.ZipFile(os.path.join(backup_dir, backup_files), 'w', zipfile.ZIP_DEFLATED) as zipf:
         for directory in directories_loc:
             # Рекурсивное добавление файлов и папок в архив
             for root, dirs, files in os.walk(directory):
                 for file in files:
                     file_path = os.path.join(root, file)
                     arcname = os.path.relpath(file_path, os.path.dirname(directory))
-                    zipf.write(file_path, arcname)
+                    if os.path.isfile(file_path):
+                        zipf.write(file_path, arcname)
 
-    return backup_dir + '/' + backup_files
+    return os.path.join(backup_dir, backup_files)
 
 
 # Функция для загрузки файла на Яндекс.Диск
